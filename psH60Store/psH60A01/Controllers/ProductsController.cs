@@ -17,7 +17,7 @@ public class ProductsController : Controller
     // GET: PRODUCTS
     public async Task<IActionResult> Index()    
     {
-        return View(Product.GetAllProducts(_context));
+        return View(ProductCategory.GetAllProductCategories(_context));
     }
 
     [Route("Details/{productid:int}")]

@@ -13,7 +13,7 @@ public partial class ProductCategory
 
     public static List<ProductCategory> GetAllProductCategories(H60AssignmentDbPsContext context)
     {
-        return context.ProductCategories.OrderBy(p => p.CategoryId).ToList();
+        return context.ProductCategories.OrderBy(p => p.ProdCat).ToList();
     }
 
     
