@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\2466776\\OneDrive - C\u00E9gep Heritage College\\Fall 2026\\420-H60-WebVI\\Assignments\\psH60Store\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D1693189-2C31-B5E1-17E3-A616CE6705B7}|psH60A01\\psH60A01.csproj|c:\\users\\2466776\\onedrive - c\u00E9gep heritage college\\fall 2026\\420-h60-webvi\\assignments\\psh60store\\psh60a01\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1693189-2C31-B5E1-17E3-A616CE6705B7}|psH60A01\\psH60A01.csproj|solutionrelative:psh60a01\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1693189-2C31-B5E1-17E3-A616CE6705B7}|psH60A01\\psH60A01.csproj|c:\\users\\2466776\\onedrive - c\u00E9gep heritage college\\fall 2026\\420-h60-webvi\\assignments\\psh60store\\psh60a01\\models\\productcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1693189-2C31-B5E1-17E3-A616CE6705B7}|psH60A01\\psH60A01.csproj|solutionrelative:psh60a01\\models\\productcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1693189-2C31-B5E1-17E3-A616CE6705B7}|psH60A01\\psH60A01.csproj|c:\\users\\2466776\\onedrive - c\u00E9gep heritage college\\fall 2026\\420-h60-webvi\\assignments\\psh60store\\psh60a01\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1693189-2C31-B5E1-17E3-A616CE6705B7}|psH60A01\\psH60A01.csproj|solutionrelative:psh60a01\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1693189-2C31-B5E1-17E3-A616CE6705B7}|psH60A01\\psH60A01.csproj|c:\\users\\2466776\\onedrive - c\u00E9gep heritage college\\fall 2026\\420-h60-webvi\\assignments\\psh60store\\psh60a01\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1693189-2C31-B5E1-17E3-A616CE6705B7}|psH60A01\\psH60A01.csproj|solutionrelative:psh60a01\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1693189-2C31-B5E1-17E3-A616CE6705B7}|psH60A01\\psH60A01.csproj|c:\\users\\2466776\\onedrive - c\u00E9gep heritage college\\fall 2026\\420-h60-webvi\\assignments\\psh60store\\psh60a01\\models\\h60assignmentdbpscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1693189-2C31-B5E1-17E3-A616CE6705B7}|psH60A01\\psH60A01.csproj|solutionrelative:psh60a01\\models\\h60assignmentdbpscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 60,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1418685207:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductCategory.cs",
+              "DocumentMoniker": "C:\\Users\\2466776\\OneDrive - C\u00E9gep Heritage College\\Fall 2026\\420-H60-WebVI\\Assignments\\psH60Store\\psH60A01\\Models\\ProductCategory.cs",
+              "RelativeDocumentMoniker": "psH60A01\\Models\\ProductCategory.cs",
+              "ToolTip": "C:\\Users\\2466776\\OneDrive - C\u00E9gep Heritage College\\Fall 2026\\420-H60-WebVI\\Assignments\\psH60Store\\psH60A01\\Models\\ProductCategory.cs",
+              "RelativeToolTip": "psH60A01\\Models\\ProductCategory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-31T16:12:04.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\2466776\\OneDrive - C\u00E9gep Heritage College\\Fall 2026\\420-H60-WebVI\\Assignments\\psH60Store\\psH60A01\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "psH60A01\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\2466776\\OneDrive - C\u00E9gep Heritage College\\Fall 2026\\420-H60-WebVI\\Assignments\\psH60Store\\psH60A01\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "psH60A01\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAuwI0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-31T16:09:49.588Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\2466776\\OneDrive - C\u00E9gep Heritage College\\Fall 2026\\420-H60-WebVI\\Assignments\\psH60Store\\psH60A01\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "psH60A01\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\2466776\\OneDrive - C\u00E9gep Heritage College\\Fall 2026\\420-H60-WebVI\\Assignments\\psH60Store\\psH60A01\\Models\\Product.cs",
+              "RelativeToolTip": "psH60A01\\Models\\Product.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAwwB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-31T20:28:57.095Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\2466776\\OneDrive - C\u00E9gep Heritage College\\Fall 2026\\420-H60-WebVI\\Assignments\\psH60Store\\psH60A01\\Program.cs",
+              "RelativeDocumentMoniker": "psH60A01\\Program.cs",
+              "ToolTip": "C:\\Users\\2466776\\OneDrive - C\u00E9gep Heritage College\\Fall 2026\\420-H60-WebVI\\Assignments\\psH60Store\\psH60A01\\Program.cs",
+              "RelativeToolTip": "psH60A01\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-31T15:53:58.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "H60AssignmentDbPsContext.cs",
+              "DocumentMoniker": "C:\\Users\\2466776\\OneDrive - C\u00E9gep Heritage College\\Fall 2026\\420-H60-WebVI\\Assignments\\psH60Store\\psH60A01\\Models\\H60AssignmentDbPsContext.cs",
+              "RelativeDocumentMoniker": "psH60A01\\Models\\H60AssignmentDbPsContext.cs",
+              "ToolTip": "C:\\Users\\2466776\\OneDrive - C\u00E9gep Heritage College\\Fall 2026\\420-H60-WebVI\\Assignments\\psH60Store\\psH60A01\\Models\\H60AssignmentDbPsContext.cs",
+              "RelativeToolTip": "psH60A01\\Models\\H60AssignmentDbPsContext.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAowD8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-31T15:51:56.264Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
