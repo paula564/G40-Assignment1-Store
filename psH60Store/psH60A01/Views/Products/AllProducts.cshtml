@@ -5,8 +5,9 @@
 @foreach (var product in Model) {
     <div>
         <p>ID: @product.ProductId</p>
-        <p>Category ID: @product.</p>
+        <p>Category ID: @product.ProdCatId</p>
+        <p>Category: @product.ProdCat.ProdCat</p>
+        <p>Name: @product.Description</p>
     </div>
 }
 
-/*PLEASE REMEMBER TO UPDATE THE ID NAME CATEGORY TO PRODCATID TO LINK THE TWO TABLES!!!*/

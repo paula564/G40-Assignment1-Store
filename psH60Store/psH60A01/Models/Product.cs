@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace psH60A01.Models;
 
@@ -25,7 +27,9 @@ public partial class Product
 
     public static List<Product> GetAllProducts(H60AssignmentDbPsContext context)
     {
-        return context.Products.ToList();
+        return context.Products
+                       .Include(p => p.ProdCat)
+                       .ToList();
     }
 
     public static Product GetProductById(H60AssignmentDbPsContext context, int id)

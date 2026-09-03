@@ -20,6 +20,12 @@ public class ProductsController : Controller
         return View(ProductCategory.GetAllProductCategories(_context));
     }
 
+    [Route("All")]
+    public async Task<IActionResult> AllProducts()
+    {
+        return View(Product.GetAllProducts(_context));
+    }
+
     [Route("Details/{productid:int}")]
     // GET: PRODUCTS/Details/5
     public async Task<IActionResult> Details(int? productid)
