@@ -1,0 +1,17 @@
+﻿@model psH60A01.Models.Product
+
+<form asp-controller="Products" asp-action="EditStock" method="post">
+
+    <input type="hidden" asp-for="@Model.ProductId" />
+    <input type="hidden" asp-for="@Model.ProdCatId" />
+    <input type="hidden" asp-for="@Model.ProdCat" />
+    <input type="hidden" asp-for="@Model.Description" />
+    <input type="hidden" asp-for="@Model.Manufacturer" />
+    <input type="hidden" asp-for="@Model.BuyPrice" />
+    <input type="hidden" asp-for="@Model.SellPrice" />
+
+    <label asp-for="@Model.Stock">Stock</label>
+    <input asp-for="@Model.Stock" class="form-control" value="@Model.Stock" />
+    <span asp-validation-for="@Model.Stock"></span>
+    <button type="submit">Edit Stock</button>
+</form>

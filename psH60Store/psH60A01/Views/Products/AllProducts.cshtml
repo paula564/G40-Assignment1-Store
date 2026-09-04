@@ -8,6 +8,8 @@
         <p>Category ID: @product.ProdCatId</p>
         <p>Category: @product.ProdCat.ProdCat</p>
         <p>Name: @product.Description</p>
+        <p>Stock: @product.Stock</p>
+        <p>@Html.ActionLink("Edit Stock", "EditStock", new {productId = product.ProductId})</p>
     </div>
 }
 

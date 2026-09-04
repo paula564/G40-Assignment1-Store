@@ -155,4 +155,19 @@ public class ProductsController : Controller
     {
         return _context.Products.Any(e => e.ProductId == productid);
     }
+
+    [Route("EditStock")]
+    [HttpGet]
+    public async Task<IActionResult> EditStock(int? productid) {
+        var product = await _context.Products.FindAsync(productid);
+        return View(product);
+    }
+
+    [Route("EditStock")]
+    [HttpPost]
+    public async Task<IActionResult> EditStock(Product product)
+    {
+        product.Update(_context, product);
+        return RedirectToAction("AllProducts", "Products");
+    }
 }

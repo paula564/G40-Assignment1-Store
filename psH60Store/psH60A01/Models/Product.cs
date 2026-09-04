@@ -29,6 +29,7 @@ public partial class Product
     {
         return context.Products
                        .Include(p => p.ProdCat)
+                       .OrderBy(x => x.Description)
                        .ToList();
     }
 
