@@ -159,15 +159,21 @@ public class ProductsController : Controller
     [Route("EditStock")]
     [HttpGet]
     public async Task<IActionResult> EditStock(int? productid) {
-        var product = await _context.Products.FindAsync(productid);
+        var product = Product.GetProductById(_context, (int)productid);
         return View(product);
     }
 
     [Route("EditStock")]
     [HttpPost]
-    public async Task<IActionResult> EditStock(Product product)
+    public async Task<IActionResult> EditStock(int? productid, int adjustment)
     {
+        var product = Product.GetProductById(_context, (int)productid);
+
+        product.Stock += adjustment;
+
         product.Update(_context, product);
+
+
         return RedirectToAction("AllProducts", "Products");
     }
 }
