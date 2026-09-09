@@ -169,11 +169,77 @@ public class ProductsController : Controller
     {
         var product = Product.GetProductById(_context, (int)productid);
 
+        if (adjustment > product.Stock)
+        {
+            throw new ArgumentOutOfRangeException(nameof(adjustment));
+        }
+
         product.Stock += adjustment;
 
         product.Update(_context, product);
 
 
         return RedirectToAction("AllProducts", "Products");
+    }
+
+    [Route("UpdateBuyPrice")]
+    [HttpGet]
+    public async Task<IActionResult> UpdateBuyPrice(int? productid)
+    {
+        var product = Product.GetProductById(_context, (int)productid);
+        return View(product);
+    }
+
+    [Route("UpdateBuyPrice")]
+    [HttpPost]
+    public async Task<IActionResult> UpdateBuyPrice(int? productid, decimal? newPrice)
+    {
+
+        var product = Product.GetProductById(_context, (int)productid);
+
+
+        if (newPrice is not decimal)
+        {
+            throw ArithmeticException(nameof(newPrice));
+        }
+
+        if (newPrice < 0)
+        {
+            throw InvalidOperationException(nameof(newPrice));
+        }
+
+        if (newPrice > product.SellPrice)
+        {
+            throw InvalidOperationException(nameof(newPrice));
+        }
+
+        
+        int decimalCount = BitConverter.GetBytes(decimal.GetBits((decimal)newPrice)[3])[2];
+
+        if (decimalCount > 2)
+        {
+            newPrice = Math.Round((decimal)newPrice, 2);
+        }
+
+        else if (decimalCount < 2) {
+            newPrice = Math.Round((decimal)newPrice, 2, MidpointRounding.AwayFromZero);
+        }
+
+        product.BuyPrice = newPrice;
+
+        product.Update(_context, product);
+
+
+        return RedirectToAction("AllProducts", "Products");
+    }
+
+    private Exception InvalidOperationException(string v)
+    {
+        throw new NotImplementedException();
+    }
+
+    private Exception ArithmeticException(string v)
+    {
+        throw new NotImplementedException();
     }
 }
