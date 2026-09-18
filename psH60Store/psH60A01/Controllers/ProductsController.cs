@@ -233,6 +233,58 @@ public class ProductsController : Controller
         return RedirectToAction("AllProducts", "Products");
     }
 
+    [Route("UpdateSellPrice")]
+    [HttpGet]
+    public async Task<IActionResult> UpdateSellPrice(int? productid)
+    {
+        var product = Product.GetProductById(_context, (int)productid);
+        return View(product);
+    }
+
+    [Route("UpdateSellPrice")]
+    [HttpPost]
+    public async Task<IActionResult> UpdateSellPrice(int? productid, decimal? newPrice)
+    {
+
+        var product = Product.GetProductById(_context, (int)productid);
+
+
+        if (newPrice is not decimal)
+        {
+            throw ArithmeticException(nameof(newPrice));
+        }
+
+        if (newPrice < 0)
+        {
+            throw InvalidOperationException(nameof(newPrice));
+        }
+
+        if (newPrice < product.BuyPrice)
+        {
+            throw InvalidOperationException(nameof(newPrice));
+        }
+
+
+        int decimalCount = BitConverter.GetBytes(decimal.GetBits((decimal)newPrice)[3])[2];
+
+        if (decimalCount > 2)
+        {
+            newPrice = Math.Round((decimal)newPrice, 2);
+        }
+
+        else if (decimalCount < 2)
+        {
+            newPrice = Math.Round((decimal)newPrice, 2, MidpointRounding.AwayFromZero);
+        }
+
+        product.BuyPrice = newPrice;
+
+        product.Update(_context, product);
+
+
+        return RedirectToAction("AllProducts", "Products");
+    }
+
     [HttpGet]
     [Route("Categories")]
 

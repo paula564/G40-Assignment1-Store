@@ -11,6 +11,7 @@
         <p>Stock: @product.Stock</p>
         <p>@Html.ActionLink("Edit Stock", "EditStock", new {productId = product.ProductId})</p>
         <p>@Html.ActionLink("Edit Buy Price", "UpdateBuyPrice", new { productId = product.ProductId })</p>
+        <p>@Html.ActionLink("Edit Sell Price", "UpdateSellPrice", new { productId = product.ProductId })</p>
     </div>
 }
 

@@ -1,0 +1,16 @@
+﻿@model psH60A01.Models.Product
+
+<form asp-controller="Products" asp-action="UpdateSellPrice" method="post">
+
+    <input type="hidden" asp-for="@Model.ProductId" />
+
+ 
+    <p>Current Sell Price: @Model.SellPrice</p>
+
+
+    <label for="adjustment">New sell price: </label>
+    <input type="number" id="newPrice" name="newPrice" />
+    <span class="text-danger" id="adjustment-validation"></span>
+
+    <button type="submit">Update Sell Price</button>
+</form>
