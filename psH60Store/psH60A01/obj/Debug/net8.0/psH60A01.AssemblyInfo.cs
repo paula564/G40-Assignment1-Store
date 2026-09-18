@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("psH60A01")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+845ff524d6635f572d57f9cf455421b1bd378947")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+54938d9fb647aa0a4f86f8f7a77fee6570664c0b")]
 [assembly: System.Reflection.AssemblyProductAttribute("psH60A01")]
 [assembly: System.Reflection.AssemblyTitleAttribute("psH60A01")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

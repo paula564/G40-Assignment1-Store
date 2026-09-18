@@ -1,0 +1,13 @@
+﻿@model IEnumerable<psH60A01.Models.Product>
+
+<main class="category-grid-view">
+    @foreach (var item in Model)
+    {
+            <div>
+                <h3>@item.Description</h3>
+                <p>@item.Manufacturer</p>
+                <p>@item.ProdCat.ProdCat</p>
+                <p>@item.ProdCatId</p>
+            </div>
+    }
+</main>

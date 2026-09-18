@@ -233,6 +233,21 @@ public class ProductsController : Controller
         return RedirectToAction("AllProducts", "Products");
     }
 
+    [HttpGet]
+    [Route("Categories")]
+
+    public IActionResult AllCategories()
+    {
+        return View(ProductCategory.GetAllProductCategories(_context));
+    }
+
+    [Route("ProductsByCategory")]
+    public IActionResult ProductsByCategory(int id)
+    {
+        var products = Product.GetAllProducts(_context).Where(p => p.ProdCatId == id).ToList();
+        return View(products);
+    }
+
     private Exception InvalidOperationException(string v)
     {
         throw new NotImplementedException();
