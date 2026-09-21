@@ -56,9 +56,6 @@ public class ProductsController : Controller
     }
 
     [Route("Create")]
-    // POST: PRODUCTS/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("ProdCatId,Description,Manufacturer,Stock,BuyPrice,SellPrice")] Product product)
@@ -333,7 +330,31 @@ public class ProductsController : Controller
         return View(category);
     }
 
+    [Route("EditCategory")]
+    [HttpGet]
+    public async Task<IActionResult> EditCategory(int? id)
+    {
+        var category = ProductCategory.GetProductCategoryById(_context, (int)id);
+        return View(category);
+    }
 
+    [Route("EditCategory")]
+    [HttpPost]
+    public async Task<IActionResult> EditCategory(int id, [Bind("ProdCat")] ProductCategory category)
+    {
+
+
+        if (ModelState.IsValid)
+        {
+            //Updating is just creating a new category, not updating the original
+           category.CategoryId = id;
+           category.Update(_context, category);
+           return RedirectToAction(nameof(AllCategories));
+        }
+
+        else { return View(category); }
+        
+    }
 
     private Exception InvalidOperationException(string v)
     {

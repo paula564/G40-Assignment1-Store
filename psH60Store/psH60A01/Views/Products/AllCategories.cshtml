@@ -8,8 +8,8 @@
     <a asp-controller="Products" asp-action="ProductsByCategory" asp-route-id="@item.CategoryId">
     <div>
         <p>@item.ProdCat</p>
-        <p><a asp-controller="Products" asp-action="EditCategory">Edit</a></p>
-        <p><a asp-controller="Products" asp-action="DeleteCategory">Delete</a></p>
+        <p><a asp-controller="Products" asp-action="EditCategory" asp-route-id="@item.CategoryId">Edit</a></p>
+        <p><a asp-controller="Products" asp-action="DeleteCategory" asp-route-id="@item.CategoryId">Delete</a></p>
     </div>
     </a> 
 }
