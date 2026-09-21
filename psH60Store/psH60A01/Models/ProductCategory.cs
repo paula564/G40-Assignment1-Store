@@ -5,6 +5,8 @@ namespace psH60A01.Models;
 
 public partial class ProductCategory
 {
+
+    public static int currentId { get; set; } = 0;
     public int CategoryId { get; set; }
 
     public string ProdCat { get; set; } = null!;

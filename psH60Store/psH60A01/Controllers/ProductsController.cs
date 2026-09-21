@@ -313,12 +313,14 @@ public class ProductsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateCategory([Bind("CategoryId, ProdCat")] ProductCategory category)
+    public async Task<IActionResult> CreateCategory([Bind("ProdCat")] ProductCategory category)
     {
         ModelState.Remove(nameof(category.Products));
         if (ModelState.IsValid)
         {
+            category.CategoryId = ProductCategory.currentId;
             category.Create(_context, category);
+            ProductCategory.currentId++;
             return RedirectToAction(nameof(AllCategories));
         }
         return View(category);
