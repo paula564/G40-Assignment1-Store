@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using psH60A01.Models;
 
@@ -48,6 +49,9 @@ public class ProductsController : Controller
     // GET: PRODUCTS/Create
     public IActionResult Create()
     {
+        
+        ViewBag.Categories = new SelectList(_context.ProductCategories, "CategoryId", "ProdCat");
+
         return View();
     }
 
@@ -57,12 +61,15 @@ public class ProductsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("ProductId,ProdCatId,Description,Manufacturer,Stock,BuyPrice,SellPrice,ProdCat")] Product product)
+    public async Task<IActionResult> Create([Bind("ProdCatId,Description,Manufacturer,Stock,BuyPrice,SellPrice")] Product product)
     {
+        ModelState.Remove(nameof(product.ProdCat));
         if (ModelState.IsValid)
         {
+            product.ProductId = Product.currentId;
             product.Create(_context, product);
-            return RedirectToAction(nameof(Index));
+            Product.currentId++;
+            return RedirectToAction(nameof(AllProducts));
         }
         return View(product);
     }

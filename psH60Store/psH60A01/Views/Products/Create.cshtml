@@ -13,11 +13,16 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <input type="hidden" asp-for="ProductId" />
+
             <div class="form-group">
-                <label asp-for="ProdCatId" class="control-label"></label>
-                <input asp-for="ProdCatId" class="form-control" />
+                <label asp-for="ProdCatId"></label>
+                <select asp-for="ProdCatId" class="form-control" asp-items="ViewBag.Categories">
+                    <option value="">-- Select Category --</option>
+                </select>
                 <span asp-validation-for="ProdCatId" class="text-danger"></span>
             </div>
+
 
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
@@ -50,11 +55,6 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="ProdCat" class="control-label"></label>
-                <input asp-for="ProdCat" class="form-control" />
-                <span asp-validation-for="ProdCat" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -62,5 +62,5 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="AllProducts">Back to List</a>
 </div>

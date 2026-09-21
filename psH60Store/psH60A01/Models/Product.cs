@@ -7,7 +7,7 @@ namespace psH60A01.Models;
 
 public partial class Product
 {
-
+    public static int currentId { get; set; } = 0;
   
     public int ProductId { get; set; }
 
