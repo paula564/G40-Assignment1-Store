@@ -300,6 +300,32 @@ public class ProductsController : Controller
         return View(products);
     }
 
+    [Route("CreateCategory")]
+    // GET: PRODUCTS/Create
+    public IActionResult CreateCategory()
+    {
+        return View();
+    }
+
+    [Route("CreateCategory")]
+    // POST: PRODUCTS/Create
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreateCategory([Bind("CategoryId, ProdCat")] ProductCategory category)
+    {
+        ModelState.Remove(nameof(category.Products));
+        if (ModelState.IsValid)
+        {
+            category.Create(_context, category);
+            return RedirectToAction(nameof(AllCategories));
+        }
+        return View(category);
+    }
+
+
+
     private Exception InvalidOperationException(string v)
     {
         throw new NotImplementedException();
