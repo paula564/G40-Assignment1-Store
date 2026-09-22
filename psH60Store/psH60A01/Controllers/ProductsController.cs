@@ -343,10 +343,8 @@ public class ProductsController : Controller
     public async Task<IActionResult> EditCategory(int id, [Bind("ProdCat")] ProductCategory category)
     {
 
-
         if (ModelState.IsValid)
         {
-            //Updating is just creating a new category, not updating the original
            category.CategoryId = id;
            category.Update(_context, category);
            return RedirectToAction(nameof(AllCategories));
@@ -354,6 +352,33 @@ public class ProductsController : Controller
 
         else { return View(category); }
         
+    }
+
+
+    [Route("DeleteCategory")]
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteCategory(int? id)
+    {
+
+
+        var category = ProductCategory.GetProductCategoryById(_context, (int)id);
+        if (category != null)
+        {
+
+            if (category.Products != null && category.Products.Count > 0)
+            {
+
+                foreach (var product in category.Products.ToList())
+                {
+                    product.Delete(_context, product.ProductId);
+                } 
+            }
+
+            category.Delete(_context, (int)id);
+
+        }
+
+        return RedirectToAction(nameof(AllCategories));
     }
 
     private Exception InvalidOperationException(string v)

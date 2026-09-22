@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace psH60A01.Models;
@@ -21,7 +22,7 @@ public partial class ProductCategory
     
     public static ProductCategory GetProductCategoryById(H60AssignmentDbPsContext context, int id)
     {
-        return context.ProductCategories.FirstOrDefault(x => x.CategoryId == id);
+        return context.ProductCategories.Include(c => c.Products).FirstOrDefault(x => x.CategoryId == id);
     }
     
 
