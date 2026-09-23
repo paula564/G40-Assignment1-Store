@@ -72,18 +72,11 @@ public class ProductsController : Controller
     }
 
     // GET: PRODUCTS/Edit/5
-    public async Task<IActionResult> Edit(int? productid)
+    [Route("EditProduct")]
+    public async Task<IActionResult> Edit(int? productId)
     {
-        if (productid == null)
-        {
-            return NotFound();
-        }
-
-        var product = await _context.Products.FindAsync(productid);
-        if (product == null)
-        {
-            return NotFound();
-        }
+        var product = Product.GetProductById(_context, (int)productId);
+        ViewBag.Categories = new SelectList(_context.ProductCategories, "CategoryId", "ProdCat");
         return View(product);
     }
 
@@ -92,32 +85,16 @@ public class ProductsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int? productid, [Bind("ProductId,ProdCatId,Description,Manufacturer,Stock,BuyPrice,SellPrice,ProdCat")] Product product)
+    [Route("EditProduct")]
+    public async Task<IActionResult> Edit(int? id, [Bind("ProdCatId", "Description", "Manufacturer")] Product product)
     {
-        if (productid != product.ProductId)
-        {
-            return NotFound();
-        }
+        ModelState.Remove(nameof(product.ProdCat));
 
         if (ModelState.IsValid)
         {
-            try
-            {
-                _context.Update(product);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(product.ProductId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return RedirectToAction(nameof(Index));
+            product.ProductId = (int)id;
+            product.Update(_context, product);
+            return RedirectToAction(nameof(AllProducts));
         }
         return View(product);
     }
