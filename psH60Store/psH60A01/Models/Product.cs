@@ -26,6 +26,7 @@ public partial class Product
     public virtual ProductCategory ProdCat { get; set; } = null!;
 
     public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
     public static List<Product> GetAllProducts(H60AssignmentDbPsContext context)
     {
