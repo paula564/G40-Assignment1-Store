@@ -99,22 +99,24 @@ public class ProductsController : Controller
         return View(product);
     }
 
-    // GET: PRODUCTS/Delete/5
-    public async Task<IActionResult> Delete(int? productid)
+    
+    [Route("DeleteProduct")]
+    [HttpDelete("{productId}")]
+    public async Task<IActionResult> Delete(int? productId)
     {
-        if (productid == null)
+        if (productId == null)
         {
             return NotFound();
         }
 
-        var product = await _context.Products
-            .FirstOrDefaultAsync(m => m.ProductId == productid);
-        if (product == null)
+        var product = Product.GetProductById(_context, (int)productId);
+
+        if (product != null)
         {
-            return NotFound();
+            product.Delete(_context, product.ProductId);
         }
 
-        return View(product);
+        return RedirectToAction(nameof(AllProducts));
     }
 
     // POST: PRODUCTS/Delete/5
