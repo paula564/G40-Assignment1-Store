@@ -287,7 +287,7 @@ public class ProductsController : Controller
     {
         var product = Product.GetProductById(_context, (int)productid);
 
-        if (adjustment == null || adjustment is int)
+        if (adjustment == null || adjustment is not int)
         {
             throw new ArgumentNullException(nameof(adjustment));
         }
