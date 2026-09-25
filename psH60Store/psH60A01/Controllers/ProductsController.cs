@@ -152,7 +152,9 @@ public class ProductsController : Controller
     {
         var product = Product.GetProductById(_context, (int)productid);
 
-        if (adjustment > product.Stock)
+        
+
+        if (product.Stock + adjustment < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(adjustment));
         }
