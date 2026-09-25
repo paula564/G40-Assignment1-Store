@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace psH60A01.Models;
@@ -12,15 +13,15 @@ public partial class Product
     public int ProductId { get; set; }
 
     public int ProdCatId { get; set; }
-
+    [MaxLength(80)]
     public string? Description { get; set; }
-
+    [MaxLength(80)]
     public string? Manufacturer { get; set; }
 
     public int Stock { get; set; }
-
+    [Precision(8, 2)]
     public decimal? BuyPrice { get; set; }
-
+    [Precision(8, 2)]
     public decimal? SellPrice { get; set; }
 
     public virtual ProductCategory ProdCat { get; set; } = null!;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace psH60A01.Models;
 
@@ -10,6 +11,7 @@ public partial class ProductCategory
     public static int currentId { get; set; } = 0;
     public int CategoryId { get; set; }
 
+    [MaxLength(80)]
     public string ProdCat { get; set; } = null!;
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();

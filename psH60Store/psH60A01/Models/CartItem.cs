@@ -13,5 +13,6 @@ namespace psH60A01.Models
         public decimal Price { get; set; }
 
         public virtual ShoppingCart ShoppingCart { get; set; } = null!;
+        public virtual Product Product { get; set; } = null!;
     }
 }

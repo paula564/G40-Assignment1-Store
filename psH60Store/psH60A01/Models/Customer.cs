@@ -14,10 +14,12 @@ namespace psH60A01.Models
         [MaxLength(10)]
         public string PhoneNumber { get; set; }
         [MaxLength(2)]
-        public char Province {  get; set; }
+        public string Province {  get; set; }
         [MaxLength(16)]
         public string CreditCard { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+        public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
+        = new List<ShoppingCart>();
     }
 }
