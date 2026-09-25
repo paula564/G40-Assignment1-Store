@@ -27,9 +27,23 @@ public class ProductsController : Controller
     }
 
     [Route("ProductsList")]
-    public async Task<IActionResult> ProductsList()
+    public async Task<IActionResult> ProductsList(string search)
     {
-        return View(Product.GetAllProducts(_context));
+        ViewData["CurrentFilter"] = search;
+
+        
+        if (string.IsNullOrEmpty(search))
+        {
+            var products = Product.GetAllProducts(_context);
+            return View("ProductsList", products); 
+        }
+        else
+        {
+            var products = Product.GetFilteredProducts(_context, search);
+            return View("ProductsList", products);
+        }
+
+
     }
 
     [Route("Details/{productid:int}")]
@@ -125,31 +139,52 @@ public class ProductsController : Controller
         return View(product);
     }
 
-   
-    [Route("EditProduct")]
-    public async Task<IActionResult> Edit(int? productId)
+
+    [Route("EditProduct/{id}")]
+    public async Task<IActionResult> Edit(int? id)
     {
-        var product = Product.GetProductById(_context, (int)productId);
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        
+        var product = Product.GetProductById(_context, (int)id);
+
+        if (product == null)
+        {
+            return NotFound();
+        }
+
         ViewBag.Categories = new SelectList(_context.ProductCategories, "CategoryId", "ProdCat");
         return View(product);
     }
 
-   
     [HttpPost]
     [ValidateAntiForgeryToken]
-    [Route("EditProduct")]
-    public async Task<IActionResult> Edit(int? id, [Bind("ProdCatId", "Description", "Manufacturer")] Product product)
+    [Route("EditProduct/{id}")]
+    public async Task<IActionResult> Edit(int? id, [Bind("ProductId,ProdCatId,Description,Manufacturer,Stock,SellPrice,BuyPrice")] Product product)
     {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
         ModelState.Remove(nameof(product.ProdCat));
 
         if (ModelState.IsValid)
         {
+            
             product.ProductId = (int)id;
             product.Update(_context, product);
             return RedirectToAction(nameof(ProductsList));
         }
+
+       
+        ViewBag.Categories = new SelectList(_context.ProductCategories, "CategoryId", "ProdCat", product.ProdCatId);
         return View(product);
     }
+
 
     [Route("DeleteProduct")]
     [HttpGet]
@@ -434,6 +469,7 @@ public class ProductsController : Controller
         else { return View(category); }
         
     }
+
 
 
   

@@ -1,16 +1,18 @@
 ﻿@model IEnumerable<psH60A01.Models.ProductCategory>
 
 <main>
+    <h1>Categories</h1>
     <a asp-controller="Products" asp-action="CreateCategory">Create a new category</a>
   <div class="category-grid-view">
 @foreach (var item in Model)
 {
     
     <div class="grid-card">
-        <h3><a asp-controller="Products" asp-action="ProductsByCategory" asp-route-id="@item.CategoryId">@item.ProdCat</a></h3>
+        <h3>@item.ProdCat</h3>
         <div class="action-buttons">
             <p><a asp-controller="Products" asp-action="EditCategory" asp-route-id="@item.CategoryId">Edit</a></p>
             <p><a asp-controller="Products" asp-action="DeleteCategory" asp-route-id="@item.CategoryId">Delete</a></p>
+            <p><a asp-controller="Products" asp-action="ProductsByCategory" asp-route-id="@item.CategoryId">View products</a></p>
         </div>
     </div>
     

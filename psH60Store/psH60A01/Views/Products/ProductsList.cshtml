@@ -4,6 +4,11 @@
 
 <a asp-controller="Products" asp-action="Create">Create a new product</a>
 
+<form asp-controller="Products" asp-action="ProductsList" method="get">
+    <input type="text" name="search" value="@ViewData["CurrentFilter"]" placeholder="Search products..." />
+    <button type="submit">Search</button>
+</form>
+
    
 <div class="category-grid-view">
 @foreach (var product in Model.OrderBy(p => p.Description)) {
@@ -11,6 +16,10 @@
         <h3>@product.Description</h3>
         <p>Buy price: @product.BuyPrice</p>
         <div class="action-buttons">
+                @if (product.Stock <= 0)
+                {
+                    <p class="red-text">OUT OF STOCK</p>
+                }
         <p>@Html.ActionLink("Details", "Details", new { productId = product.ProductId })</p>
         </div>
     </div>

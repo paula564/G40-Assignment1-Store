@@ -21,15 +21,6 @@ body {
   margin-bottom: 60px;
 }
 
-/*
-
-.category-grid-view {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 10px;
-    gap: 20px
-}
-    */
 
 .category-grid-view {
     display: grid;
@@ -65,4 +56,8 @@ h3 {
 
 a {
     text-decoration: none;
+}
+
+.red-text {
+    color: red
 }

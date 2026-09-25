@@ -11,6 +11,10 @@
     <div class="grid-card">
         <h3>@product.Description</h3>
         <p>Buy price: @product.BuyPrice</p>
+                @if (product.Stock <= 0)
+                {
+                    <p class="red-text">OUT OF STOCK</p>
+                }
         <div class="action-buttons">
         <p>@Html.ActionLink("Details", "Details", new { productId = product.ProductId })</p>
         </div>

@@ -14,10 +14,15 @@
     <p>Stock: @Model.Stock</p>
     <p>Buy price: @Model.BuyPrice</p>
     <p>Sell price: @Model.SellPrice</p>
+    @if (Model.Stock <= 0)
+    {
+        <p class="red-text">OUT OF STOCK</p>
+    }
 
 <div>
     <div class="action-buttons">
-        <p>@Html.ActionLink("Edit", "Edit", new { productId = Model.ProductId })</p>
+            <p><a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a></p>
+            
         <p>@Html.ActionLink("Delete", "Delete", new { productId = Model.ProductId })</p>
         <p>@Html.ActionLink("Edit Stock", "EditStock", new {productId = Model.ProductId})</p>
         <p>@Html.ActionLink("Edit Buy Price", "UpdateBuyPrice", new { productId = Model.ProductId })</p>

@@ -10,8 +10,14 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit" asp-route-id="@Model.ProductId">
+      
+        <form asp-route="Edit" asp-route-id="@Model.ProductId" method="post">
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProductId" />
+            <input type="hidden" asp-for="Stock" />
+            <input type="hidden" asp-for="SellPrice" />
+            <input type="hidden" asp-for="BuyPrice" />
 
             <div class="form-group">
                 <label asp-for="ProdCatId"></label>

@@ -53,6 +53,11 @@ public partial class Product
 
     }
 
+    public static List<Product> GetFilteredProducts(H60AssignmentDbPsContext context, string search)
+    {
+        return context.Products.Where(p => p.Description.Contains(search)).ToList();
+    }
+
     public void Create(H60AssignmentDbPsContext context, Product product)
     {
         context.Products.Add(product);
