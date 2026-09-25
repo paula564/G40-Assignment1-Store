@@ -1,0 +1,20 @@
+﻿@model IEnumerable<psH60A01.Models.Product>
+
+<h1>All Products</h1>
+
+<a asp-controller="Products" asp-action="Create">Create a new product</a>
+
+   
+<div class="category-grid-view">
+@foreach (var product in Model.OrderBy(p => p.Description)) {
+    <div class="grid-card">
+        <h3>@product.Description</h3>
+        <p>Buy price: @product.BuyPrice</p>
+        <div class="action-buttons">
+        <p>@Html.ActionLink("Details", "Details", new { productId = product.ProductId })</p>
+        </div>
+    </div>
+}
+</div>
+
+

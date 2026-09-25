@@ -26,6 +26,12 @@ public class ProductsController : Controller
         return View(Product.GetAllProducts(_context));
     }
 
+    [Route("ProductsList")]
+    public async Task<IActionResult> ProductsList()
+    {
+        return View(Product.GetAllProducts(_context));
+    }
+
     [Route("Details/{productid:int}")]
     public async Task<IActionResult> Details(int? productid)
     {
@@ -140,7 +146,7 @@ public class ProductsController : Controller
         {
             product.ProductId = (int)id;
             product.Update(_context, product);
-            return RedirectToAction(nameof(AllProducts));
+            return RedirectToAction(nameof(ProductsList));
         }
         return View(product);
     }
@@ -360,7 +366,7 @@ public class ProductsController : Controller
             newPrice = Math.Round((decimal)newPrice, 2, MidpointRounding.AwayFromZero);
         }
 
-        product.BuyPrice = newPrice;
+        product.SellPrice = newPrice;
 
         product.Update(_context, product);
 
