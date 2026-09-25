@@ -5,62 +5,22 @@
 }
 
 <h1>Details</h1>
+<p>@Html.ActionLink("Go back to Products", "AllProducts")</p>
+
+<div class="grid-card">
+    <h3>@Model.Description</h3>
+    <p>Category: @Model.ProdCat.ProdCat</p>
+    <p>Manufacturer: @Model.Manufacturer</p>
+    <p>Stock: @Model.Stock</p>
+    <p>Buy price: @Model.BuyPrice</p>
+    <p>Sell price: @Model.SellPrice</p>
 
 <div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProdCatId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProdCatId)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Manufacturer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Manufacturer)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Stock)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Stock)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BuyPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BuyPrice)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SellPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SellPrice)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProdCat)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProdCat)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ProductId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="action-buttons">
+        <p>@Html.ActionLink("Edit", "Edit", new { productId = Model.ProductId })</p>
+        <p>@Html.ActionLink("Delete", "Delete", new { productId = Model.ProductId })</p>
+        <p>@Html.ActionLink("Edit Stock", "EditStock", new {productId = Model.ProductId})</p>
+        <p>@Html.ActionLink("Edit Buy Price", "UpdateBuyPrice", new { productId = Model.ProductId })</p>
+        <p>@Html.ActionLink("Edit Sell Price", "UpdateSellPrice", new { productId = Model.ProductId })</p>
+       </div>
 </div>

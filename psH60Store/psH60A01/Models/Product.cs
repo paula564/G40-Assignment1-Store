@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -12,18 +13,26 @@ public partial class Product
   
     public int ProductId { get; set; }
 
+    [DisplayName("Category")]
     public int ProdCatId { get; set; }
     [MaxLength(80)]
+    [Required]
     public string? Description { get; set; }
     [MaxLength(80)]
+    [Required]
     public string? Manufacturer { get; set; }
-
+    [Required]
     public int Stock { get; set; }
     [Precision(8, 2)]
+    [Required]
+    [DisplayName("Buy price")]
     public decimal? BuyPrice { get; set; }
     [Precision(8, 2)]
+    [Required]
+    [DisplayName("Sell price")]
     public decimal? SellPrice { get; set; }
 
+    
     public virtual ProductCategory ProdCat { get; set; } = null!;
 
     public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
@@ -33,13 +42,14 @@ public partial class Product
     {
         return context.Products
                        .Include(p => p.ProdCat)
-                       .OrderBy(x => x.Description)
+                       .OrderBy(x => x.ProdCat.ProdCat)
+                       .ThenBy(x => x.Description)
                        .ToList();
     }
 
     public static Product GetProductById(H60AssignmentDbPsContext context, int id)
     {
-       return context.Products.FirstOrDefault(x => x.ProductId == id);
+       return context.Products.Include(p => p.ProdCat).FirstOrDefault(x => x.ProductId == id);
 
     }
 

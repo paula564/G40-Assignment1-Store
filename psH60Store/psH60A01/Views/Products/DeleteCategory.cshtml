@@ -1,0 +1,21 @@
+@model psH60A01.Models.ProductCategory
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete category</h1>
+
+<h3>Are you sure you want to delete this and all its related products?</h3>
+<div class="grid-card">
+    <h3>@Model.ProdCat</h3>
+
+<div>
+        <form asp-action="DeleteConfirmedCategory" asp-route-id="@Model.CategoryId">
+        <input type="hidden" asp-for="CategoryId" />
+        <div class="action-buttons">
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        <a asp-action="AllCategories">Back to All Categories</a>
+         </div>
+    </form>
+</div>

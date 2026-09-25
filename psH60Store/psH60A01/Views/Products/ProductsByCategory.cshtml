@@ -1,13 +1,18 @@
 ﻿@model IEnumerable<psH60A01.Models.Product>
 
 <main class="category-grid-view">
+    <div class="category-grid-view">
     @foreach (var item in Model)
     {
-            <div>
+            <div class="grid-card">
                 <h3>@item.Description</h3>
-                <p>@item.Manufacturer</p>
-                <p>@item.ProdCat.ProdCat</p>
-                <p>@item.ProdCatId</p>
+                <p>Sell price: @item.SellPrice</p>
+                
+                <div class="action-buttons">
+                    <p>@Html.ActionLink("Details", "Details", new { productId = item.ProductId })</p>
+                </div>
             </div>
+
     }
+    </div>
 </main>

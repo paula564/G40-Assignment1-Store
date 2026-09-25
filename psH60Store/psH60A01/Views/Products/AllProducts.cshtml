@@ -3,22 +3,19 @@
 <h1>All Products</h1>
 
 <a asp-controller="Products" asp-action="Create">Create a new product</a>
+@foreach (var categoryGroup in Model.GroupBy(p => p.ProdCat))
+{
+    <h3>@categoryGroup.Key.ProdCat</h3>
 <div class="category-grid-view">
-@foreach (var product in Model) {
+@foreach (var product in categoryGroup) {
     <div class="grid-card">
-        <h3>ID: @product.ProductId</h3>
-        <p>Category ID: @product.ProdCatId</p>
-        <p>Category: @product.ProdCat.ProdCat</p>
-        <p>Name: @product.Description</p>
-        <p>Stock: @product.Stock</p>
+        <h3>@product.Description</h3>
+        <p>Buy price: @product.BuyPrice</p>
         <div class="action-buttons">
-        <p>@Html.ActionLink("Edit", "Edit", new { productId = product.ProductId })</p>
-        <p>@Html.ActionLink("Delete", "Delete", new { productId = product.ProductId })</p>
-        <p>@Html.ActionLink("Edit Stock", "EditStock", new {productId = product.ProductId})</p>
-        <p>@Html.ActionLink("Edit Buy Price", "UpdateBuyPrice", new { productId = product.ProductId })</p>
-        <p>@Html.ActionLink("Edit Sell Price", "UpdateSellPrice", new { productId = product.ProductId })</p>
+        <p>@Html.ActionLink("Details", "Details", new { productId = product.ProductId })</p>
         </div>
     </div>
 }
 </div>
+}
 

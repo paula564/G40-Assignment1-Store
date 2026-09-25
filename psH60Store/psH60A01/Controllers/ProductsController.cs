@@ -15,7 +15,6 @@ public class ProductsController : Controller
     }
 
     [Route("Index")]
-    // GET: PRODUCTS
     public async Task<IActionResult> Index()    
     {
         return View(ProductCategory.GetAllProductCategories(_context));
@@ -28,7 +27,6 @@ public class ProductsController : Controller
     }
 
     [Route("Details/{productid:int}")]
-    // GET: PRODUCTS/Details/5
     public async Task<IActionResult> Details(int? productid)
     {
         if (productid == null)
@@ -46,7 +44,6 @@ public class ProductsController : Controller
     }
 
     [Route("Create")]
-    // GET: PRODUCTS/Create
     public IActionResult Create()
     {
         
@@ -61,6 +58,57 @@ public class ProductsController : Controller
     public async Task<IActionResult> Create([Bind("ProdCatId,Description,Manufacturer,Stock,BuyPrice,SellPrice")] Product product)
     {
         ModelState.Remove(nameof(product.ProdCat));
+
+        if (product.BuyPrice is not decimal)
+        {
+            throw ArithmeticException("The buy price cannot be non-numeric.");
+        }
+
+        if (product.BuyPrice < 0)
+        {
+            throw InvalidOperationException("The buy price cannot be less than 0.");
+        }
+
+        if (product.SellPrice is not decimal)
+        {
+            throw ArithmeticException("The sell price cannot be non-numeric.");
+        }
+
+        if (product.SellPrice < 0)
+        {
+            throw InvalidOperationException("The sell price cannot be less than 0.");
+        }
+
+        if (product.BuyPrice > product.SellPrice)
+        {
+            throw InvalidOperationException("The buy price cannot be greater than the sell price.");
+        }
+
+
+        int decimalCountBuyPrice = BitConverter.GetBytes(decimal.GetBits((decimal)product.BuyPrice)[3])[2];
+
+        if (decimalCountBuyPrice > 2)
+        {
+            product.BuyPrice = Math.Round((decimal)product.BuyPrice, 2);
+        }
+
+        else if (decimalCountBuyPrice < 2)
+        {
+            product.BuyPrice = Math.Round((decimal)product.BuyPrice, 2, MidpointRounding.AwayFromZero);
+        }
+
+        int decimalCountSellPrice = BitConverter.GetBytes(decimal.GetBits((decimal)product.SellPrice)[3])[2];
+
+        if (decimalCountSellPrice > 2)
+        {
+            product.SellPrice = Math.Round((decimal)product.SellPrice, 2);
+        }
+
+        else if (decimalCountSellPrice < 2)
+        {
+            product.SellPrice = Math.Round((decimal)product.SellPrice, 2, MidpointRounding.AwayFromZero);
+        }
+
         if (ModelState.IsValid)
         {
             product.ProductId = Product.currentId;
@@ -71,7 +119,7 @@ public class ProductsController : Controller
         return View(product);
     }
 
-    // GET: PRODUCTS/Edit/5
+   
     [Route("EditProduct")]
     public async Task<IActionResult> Edit(int? productId)
     {
@@ -80,9 +128,7 @@ public class ProductsController : Controller
         return View(product);
     }
 
-    // POST: PRODUCTS/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+   
     [HttpPost]
     [ValidateAntiForgeryToken]
     [Route("EditProduct")]
@@ -99,9 +145,8 @@ public class ProductsController : Controller
         return View(product);
     }
 
-    
     [Route("DeleteProduct")]
-    [HttpDelete("{productId}")]
+    [HttpGet]
     public async Task<IActionResult> Delete(int? productId)
     {
         if (productId == null)
@@ -111,27 +156,76 @@ public class ProductsController : Controller
 
         var product = Product.GetProductById(_context, (int)productId);
 
+        if (product == null)
+        {
+            return NotFound();
+        }
+
+        return View(product);
+    }
+
+
+ 
+    [HttpPost("Delete/{id}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int? id)
+    {
+        var product = Product.GetProductById(_context, (int)id);
         if (product != null)
         {
             product.Delete(_context, product.ProductId);
         }
 
-        return RedirectToAction(nameof(AllProducts));
+        
+        return RedirectToAction("AllProducts");
     }
 
-    // POST: PRODUCTS/Delete/5
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int? productid)
+    [Route("DeleteCategory/{id?}")]
+    [HttpGet]
+    public async Task<IActionResult> DeleteCategory(int? id)
     {
-        var product = await _context.Products.FindAsync(productid);
-        if (product != null)
+        if (id == null)
         {
-            _context.Products.Remove(product);
+            return NotFound();
         }
 
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        var category = ProductCategory.GetProductCategoryById(_context, (int)id);
+
+        if (category == null)
+        {
+            return NotFound();
+        }
+
+        return View(category);
+    }
+
+
+
+    [HttpPost]
+    [Route("DeleteCategory/{id}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmedCategory(int? id)
+    {
+      
+            var category = ProductCategory.GetProductCategoryById(_context, (int)id);
+            if (category != null)
+            {
+
+                if (category.Products != null && category.Products.Count > 0)
+                {
+
+                    foreach (var product in category.Products.ToList())
+                    {
+                        product.Delete(_context, product.ProductId);
+                    }
+                }
+
+                category.Delete(_context, (int)id);
+
+            }
+
+            return RedirectToAction(nameof(AllCategories));
+        
     }
 
     private bool ProductExists(int? productid)
@@ -148,10 +242,14 @@ public class ProductsController : Controller
 
     [Route("EditStock")]
     [HttpPost]
-    public async Task<IActionResult> EditStock(int? productid, int adjustment)
+    public async Task<IActionResult> EditStock(int? productid, int? adjustment)
     {
         var product = Product.GetProductById(_context, (int)productid);
 
+        if (adjustment == null || adjustment is int)
+        {
+            throw new ArgumentNullException(nameof(adjustment));
+        }
         
 
         if (product.Stock + adjustment < 0)
@@ -159,7 +257,7 @@ public class ProductsController : Controller
             throw new ArgumentOutOfRangeException(nameof(adjustment));
         }
 
-        product.Stock += adjustment;
+        product.Stock += (int)adjustment;
 
         product.Update(_context, product);
 
@@ -185,17 +283,17 @@ public class ProductsController : Controller
 
         if (newPrice is not decimal)
         {
-            throw ArithmeticException(nameof(newPrice));
+            throw ArithmeticException("The new price cannot be non-numeric.");
         }
 
         if (newPrice < 0)
         {
-            throw InvalidOperationException(nameof(newPrice));
+            throw InvalidOperationException("The new price cannot be less than 0.");
         }
 
         if (newPrice > product.SellPrice)
         {
-            throw InvalidOperationException(nameof(newPrice));
+            throw InvalidOperationException("The new buy price cannot be more than the current buy price.");
         }
 
         
@@ -236,17 +334,17 @@ public class ProductsController : Controller
 
         if (newPrice is not decimal)
         {
-            throw ArithmeticException(nameof(newPrice));
+            throw ArithmeticException("The new price cannot be non-numeric.");
         }
 
         if (newPrice < 0)
         {
-            throw InvalidOperationException(nameof(newPrice));
+            throw InvalidOperationException("The new price cannot be less than 0.");
         }
 
         if (newPrice < product.BuyPrice)
         {
-            throw InvalidOperationException(nameof(newPrice));
+            throw InvalidOperationException("The new sell price cannot be less than the current buy price.");
         }
 
 
@@ -286,16 +384,12 @@ public class ProductsController : Controller
     }
 
     [Route("CreateCategory")]
-    // GET: PRODUCTS/Create
     public IActionResult CreateCategory()
     {
         return View();
     }
 
     [Route("CreateCategory")]
-    // POST: PRODUCTS/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateCategory([Bind("ProdCat")] ProductCategory category)
@@ -336,39 +430,15 @@ public class ProductsController : Controller
     }
 
 
-    [Route("DeleteCategory")]
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteCategory(int? id)
-    {
-
-
-        var category = ProductCategory.GetProductCategoryById(_context, (int)id);
-        if (category != null)
-        {
-
-            if (category.Products != null && category.Products.Count > 0)
-            {
-
-                foreach (var product in category.Products.ToList())
-                {
-                    product.Delete(_context, product.ProductId);
-                } 
-            }
-
-            category.Delete(_context, (int)id);
-
-        }
-
-        return RedirectToAction(nameof(AllCategories));
-    }
+  
 
     private Exception InvalidOperationException(string v)
     {
-        throw new NotImplementedException();
+        return new InvalidOperationException(v);
     }
 
     private Exception ArithmeticException(string v)
     {
-        throw new NotImplementedException();
+        return new ArithmeticException(v);
     }
 }
