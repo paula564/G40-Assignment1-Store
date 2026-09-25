@@ -2,16 +2,18 @@
 
 <main>
     <a asp-controller="Products" asp-action="CreateCategory">Create a new category</a>
-    <div class="category-grid-view">
+  <div class="category-grid-view">
 @foreach (var item in Model)
 {
-    <a asp-controller="Products" asp-action="ProductsByCategory" asp-route-id="@item.CategoryId">
-    <div>
-        <p>@item.ProdCat</p>
-        <p><a asp-controller="Products" asp-action="EditCategory" asp-route-id="@item.CategoryId">Edit</a></p>
-        <p><a asp-controller="Products" asp-action="DeleteCategory" asp-route-id="@item.CategoryId">Delete</a></p>
+    
+    <div class="grid-card">
+        <h3><a asp-controller="Products" asp-action="ProductsByCategory" asp-route-id="@item.CategoryId">@item.ProdCat</a></h3>
+        <div class="action-buttons">
+            <p><a asp-controller="Products" asp-action="EditCategory" asp-route-id="@item.CategoryId">Edit</a></p>
+            <p><a asp-controller="Products" asp-action="DeleteCategory" asp-route-id="@item.CategoryId">Delete</a></p>
+        </div>
     </div>
-    </a> 
+    
 }
 </div>
 </main>

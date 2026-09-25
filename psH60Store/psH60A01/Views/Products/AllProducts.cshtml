@@ -3,19 +3,22 @@
 <h1>All Products</h1>
 
 <a asp-controller="Products" asp-action="Create">Create a new product</a>
-
+<div class="category-grid-view">
 @foreach (var product in Model) {
-    <div>
-        <p>ID: @product.ProductId</p>
+    <div class="grid-card">
+        <h3>ID: @product.ProductId</h3>
         <p>Category ID: @product.ProdCatId</p>
         <p>Category: @product.ProdCat.ProdCat</p>
         <p>Name: @product.Description</p>
         <p>Stock: @product.Stock</p>
+        <div class="action-buttons">
         <p>@Html.ActionLink("Edit", "Edit", new { productId = product.ProductId })</p>
         <p>@Html.ActionLink("Delete", "Delete", new { productId = product.ProductId })</p>
         <p>@Html.ActionLink("Edit Stock", "EditStock", new {productId = product.ProductId})</p>
         <p>@Html.ActionLink("Edit Buy Price", "UpdateBuyPrice", new { productId = product.ProductId })</p>
         <p>@Html.ActionLink("Edit Sell Price", "UpdateSellPrice", new { productId = product.ProductId })</p>
+        </div>
     </div>
 }
+</div>
 
